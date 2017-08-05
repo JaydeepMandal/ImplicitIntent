@@ -32,7 +32,7 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintTop_toBottomOf="@+id/webEditText"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent" />
@@ -47,7 +47,7 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintTop_toBottomOf="@+id/webButton"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent" />
@@ -58,38 +58,79 @@
         android:layout_height="wrap_content"
         android:onClick="openLocation"
         android:text="OPEN LOCATION"
-        app:layout_constraintTop_toBottomOf="@+id/locEditText"
+        tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:layout_marginEnd="41dp"
+        app:layout_constraintRight_toRightOf="@+id/locEditText"
+        android:layout_marginTop="21dp"
+        app:layout_constraintTop_toBottomOf="@+id/locEditText" />
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
         android:ems="10"
         android:hint="Enter Message"
         android:inputType="textPersonName"
-        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="24dp"
         app:layout_constraintTop_toBottomOf="@+id/locationButton"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
         android:onClick="shareText"
         android:text="SHARE TEXT"
-        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="33dp"
         app:layout_constraintTop_toBottomOf="@+id/editText"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <EditText
+        android:id="@+id/pnoneEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Mobile No."
+        android:inputType="phone"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="34dp"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/button3" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="openDialer"
+        android:text="OPEN DIALER"
+        android:layout_marginStart="85dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button4"
+        tools:layout_constraintBaseline_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:onClick="openCallHead"
+        android:text="CALL"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="34dp"
+        app:layout_constraintLeft_toRightOf="@+id/button3" />
+
 </android.support.constraint.ConstraintLayout>

@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText webPage;
     private EditText locEditText;
     private  EditText text;
+    private  EditText phoneEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         webPage = (EditText) findViewById(R.id.webEditText);
         locEditText = (EditText) findViewById(R.id.locEditText);
         text = (EditText) findViewById(R.id.editText);
+        phoneEditText = (EditText) findViewById(R.id.pnoneEditText);
     }
 
     public void openWebsite(View v){
@@ -74,6 +76,48 @@ public class MainActivity extends AppCompatActivity {
                 .setChooserTitle("Share this text with:")
                 .setText(txt)
                 .startChooser();
+    }
+
+    public void openDialer(View v){
+
+        String phoneNo = phoneEditText.getText().toString();
+        if(phoneNo.startsWith("+")||phoneNo.startsWith("0")){
+            Toast.makeText(getApplicationContext(), "Don't enter national code", Toast.LENGTH_SHORT).show();
+        }
+        else if(phoneNo.length()!=10){
+            Toast.makeText(getApplicationContext(), "Enter Exactly 10 digits", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Uri uri = Uri.parse("tel:"+phoneNo);
+            Intent intent = new Intent(Intent.ACTION_DIAL,uri);
+            if(intent.resolveActivity(getPackageManager())!=null){
+                startActivity(intent);
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "No app to handle", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public void openCallHead(View v){
+
+        String phoneNo = phoneEditText.getText().toString();
+        if(phoneNo.startsWith("+")||phoneNo.startsWith("0")){
+            Toast.makeText(getApplicationContext(), "Don't enter national code", Toast.LENGTH_SHORT).show();
+        }
+        else if(phoneNo.length()!=10){
+            Toast.makeText(getApplicationContext(), "Enter Exactly 10 digits", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Uri uri = Uri.parse("tel:"+phoneNo);
+            Intent intent = new Intent(Intent.ACTION_CALL,uri);
+            if(intent.resolveActivity(getPackageManager())!=null){
+                startActivity(intent);
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "Cant Call", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 }
