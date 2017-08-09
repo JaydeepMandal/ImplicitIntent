@@ -3,10 +3,13 @@ package com.example.ee.implicitintent;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.icu.util.TimeUnit;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -111,21 +114,27 @@ public class MainActivity extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {   //to check build version in higher than android Marshmallow
 
-            //permission is already available
-            if(checkSelfPermission(Manifest.permission.CALL_PHONE)== PackageManager.PERMISSION_GRANTED){
+            if(ContextCompat.checkSelfPermission(getApplicationContext(),Manifest.permission.CALL_PHONE)!=PackageManager.PERMISSION_GRANTED){
+
+                if(shouldShowRequestPermissionRationale(Manifest.permission.CALL_PHONE)){
+                    Toast.makeText(getApplicationContext(), "Required for direct calling", Toast.LENGTH_LONG).show();
+                    requestPermissions(new String[]{Manifest.permission.CALL_PHONE},
+                            REQUEST_CALL_PHONE);
+                }
+
+                else {
+                    requestPermissions(new String[]{Manifest.permission.CALL_PHONE},
+                            REQUEST_CALL_PHONE);
+                }
+
+            }
+            else{
                 callPhone();
             }
 
-            //permission is not available
-            else{
-                //user didn't gave permission during first popup of request permission
-                if(shouldShowRequestPermissionRationale(Manifest.permission.CALL_PHONE)){
-                    Toast.makeText(getApplicationContext(), "Required to directly call", Toast.LENGTH_SHORT).show();
-                }
-                //request for CELL_PHONE permission
-                requestPermissions(new String[]{Manifest.permission.CALL_PHONE},REQUEST_CALL_PHONE);
-            }
-
+        }
+        else{
+            callPhone();
         }
 
     }
