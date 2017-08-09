@@ -1,6 +1,9 @@
 package com.example.ee.implicitintent;
 
 import android.Manifest;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.icu.util.TimeUnit;
@@ -10,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -108,6 +112,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+//    public boolean dialog(){
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setCancelable(true)
+//                .setTitle("Important Permission:")
+//                .setMessage("Required for direct calling")
+//                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+//                    @TargetApi(Build.VERSION_CODES.M)
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                        ActivityCompat.requestPermissions(Activity context,new String[]{Manifest.permission.CALL_PHONE},REQUEST_CALL_PHONE);
+//
+//                    }
+//                })
+//                .create()
+//                .show();
+//
+//    }
+
+
     public void openCallHead(View v){ //call to callPhone() method on button click
 
         //code to handle permission given in manifest specially for android M and above
@@ -117,9 +141,27 @@ public class MainActivity extends AppCompatActivity {
             if(ContextCompat.checkSelfPermission(getApplicationContext(),Manifest.permission.CALL_PHONE)!=PackageManager.PERMISSION_GRANTED){
 
                 if(shouldShowRequestPermissionRationale(Manifest.permission.CALL_PHONE)){
-                    Toast.makeText(getApplicationContext(), "Required for direct calling", Toast.LENGTH_LONG).show();
-                    requestPermissions(new String[]{Manifest.permission.CALL_PHONE},
-                            REQUEST_CALL_PHONE);
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setCancelable(true)
+                            .setTitle("Important Permission:")
+                            .setMessage("Required for direct calling")
+                            .setPositiveButton("CONTINUE", new DialogInterface.OnClickListener() {
+                                @TargetApi(Build.VERSION_CODES.M)
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    requestPermissions(new String[]{Manifest.permission.CALL_PHONE},
+                                            REQUEST_CALL_PHONE);
+
+                                }
+                            })
+                            .setNegativeButton("NOT NOW",null)
+                            .create()
+                            .show();
+
+
+
+
                 }
 
                 else {
